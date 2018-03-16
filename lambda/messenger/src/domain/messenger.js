@@ -5,31 +5,37 @@
 
 const validations = require('./validations');
 
-function Messenger(messagingAdapter) {
-  if (!validations.isDefined(messagingAdapter) || !validations.isAFunction(messagingAdapter.send)) {
-    throw new Error(Messenger.Errors.InvalidAdapter);
+class Messenger{
+
+  constructor(messagingAdapter){
+    if (!validations.isDefined(messagingAdapter) || !validations.isAFunction(messagingAdapter.send)) {
+      throw new Error(Messenger.Errors.InvalidAdapter);
+    }
+
+    this.messagingAdapter = messagingAdapter;
+    this.readyToSend = false;
+    this.request = null;
+
+    Object.seal(this);
   }
 
-  this.messagingAdapter = messagingAdapter;
-  this.readyToSend = false;
+  receive(message){
+    this.request = message;
 
-  Object.seal(this);
+    this.readyToSend = message.validate();
+
+    return this.readyToSend;
+  }
+
+  send(){
+    return this.readyToSend && this.messagingAdapter.send(this.request);
+  }
 }
+
 
 Messenger.Errors = {
   InvalidAdapter: 'Invalid adapter'
 };
 
-Messenger.prototype.receive = function messengerRecieve(message) {
-  this.request = message;
-
-  this.readyToSend = message.validate();
-
-  return this.readyToSend;
-};
-
-Messenger.prototype.send = function messengerSend() {
-  return this.readyToSend && this.messagingAdapter.send(this.request);
-};
 
 module.exports = Messenger;

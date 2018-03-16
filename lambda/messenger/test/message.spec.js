@@ -18,7 +18,7 @@ describe('A Messenger', () => {
   });
 
   it('should throw when it is created without an adapter', () => {
-    expect(() => Messenger()).to.throw('Invalid adapter');
+    expect(() => new Messenger()).to.throw('Invalid adapter');
   });
 
   it('should recieve a Message', () => {
