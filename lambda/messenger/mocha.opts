@@ -1,0 +1,5 @@
+--require ./test/support/test-setup.js
+--ui bdd
+--globals module
+--timeout 200
+--colors
