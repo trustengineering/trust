@@ -1,46 +1,37 @@
 /* eslint-env node, mocha */
 
 const { expect } = require('./support/expect');
-const sinon = require('sinon');
-const { invalidMessage, validMessage } = require('./support/stubs');
+const { Message } = require('../src/domain');
 
-const { Messenger, Message } = require('../src/domain');
+describe('A Message', () => {
 
-const stubAdapter = {
-  send: () => null
-};
+  it('should fail validation when no sender is provided', () => {
+    expect(() =>{
+      const message = new Message({
+        subject: 'foo',
+        body: 'bar',
+      });
 
-describe('A Messenger', () => {
-  let messenger;
+      message.validate();
+    }).to.throw('Invalid message')
 
-  beforeEach(() => {
-    messenger = new Messenger(stubAdapter);
   });
 
-  it('should throw when it is created without an adapter', () => {
-    expect(() => new Messenger()).to.throw('Invalid adapter');
+  it('should validate a valid message payload', () => {
+    const testMessageValidation = () =>{
+      const message = new Message({
+        subject: 'foo',
+        body: 'bar',
+        sender: {
+          name: 'foo bar',
+          email: 'foo.bar@baz.com'
+        }
+      });
+
+      return message.validate();
+    };
+
+    expect(testMessageValidation()).to.be.equal(true);
   });
 
-  it('should recieve a Message', () => {
-    messenger.receive(new Message(validMessage));
-
-    expect(messenger.readyToSend).to.equal(true);
-  });
-
-  it('should throw when it recieves an invalid message', () => {
-    expect(() => messenger.receive(new Message(invalidMessage))).to.throw(
-      'Invalid message request',
-      Error
-    );
-  });
-
-  it('should send a reponse for a valid request', () => {
-    const sendSpy = sinon.spy(stubAdapter, 'send');
-
-    messenger.receive(new Message(validMessage));
-    messenger.send();
-
-    expect(sendSpy.callCount).to.equal(1);
-    sendSpy.restore();
-  });
 });

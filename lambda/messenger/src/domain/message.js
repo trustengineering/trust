@@ -19,7 +19,7 @@ class Message{
       validations.isAString(rawMessage.sender.name);
 
     if (!isValid(this.rawMessage)) {
-      throw new Error(Message.Errors.invalidRequest);
+      throw new Error(Message.Errors.invalidMessage);
     }
 
     return true;
@@ -27,7 +27,7 @@ class Message{
 }
 
 Message.Errors = {
-  invalidRequest: 'Invalid message request'
+  invalidMessage: 'Invalid message'
 };
 
 module.exports = Message;
