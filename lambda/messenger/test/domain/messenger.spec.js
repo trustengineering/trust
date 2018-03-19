@@ -3,11 +3,11 @@
  *
  */
 
-const { expect } = require('./support/expect');
 const sinon = require('sinon');
-const { invalidMessage, validMessage } = require('./support/stubs');
 
-const { Messenger, Message } = require('../src/domain');
+const { expect } = require('../support/expect');
+const { invalidMessage, validMessage } = require('../support/stubs');
+const { Messenger, Message } = require('../../src/domain');
 
 const nullChannel = {
   send: () => null
