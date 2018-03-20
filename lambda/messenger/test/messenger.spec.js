@@ -1,4 +1,7 @@
-/* eslint-env node, mocha */
+/**
+ *  eslint-env node, mocha
+ *
+ */
 
 const { expect } = require('./support/expect');
 const sinon = require('sinon');
@@ -28,8 +31,7 @@ describe('A Messenger', () => {
   });
 
   it('should throw when it receives an invalid Message', () => {
-    expect(() => messenger.receive(new Message(invalidMessage))).to.throw(
-      'Invalid message');
+    expect(() => messenger.receive(new Message(invalidMessage))).to.throw('Invalid message');
   });
 
   it('should send a message via the provided Channel', () => {
