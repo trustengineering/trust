@@ -9,4 +9,4 @@ moduleExports.typeOf = value => primitive => typeof value === primitive; // esli
 moduleExports.isAString = value => moduleExports.typeOf(value)('string');
 moduleExports.isAFunction = value => moduleExports.typeOf(value)('function');
 
-module.exports = moduleExports;
+export default moduleExports;

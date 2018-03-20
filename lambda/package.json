@@ -2,14 +2,18 @@
   "name": "lambda",
   "version": "1.0.0",
   "description": "Trust Lambdas",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "test": "cucumber-js",
+    "unit": "cd ./messenger && npm test",
     "prettier": "prettier --config ./.prettierrc --write \"./**/.js\" "
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "chai": "4.1.2",
+    "chai-as-promised": "7.1.1",
     "cucumber": "^4.0.0",
     "editorconfig": "^0.15.0",
     "eslint": "^4.18.2",
@@ -17,6 +21,8 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
-    "prettier": "^1.11.1"
+    "prettier": "^1.11.1",
+    "webpack": "4.1.1",
+    "webpack-cli": "2.0.12"
   }
 }

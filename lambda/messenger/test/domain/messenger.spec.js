@@ -3,11 +3,12 @@
  *
  */
 
-const sinon = require('sinon');
+import sinon from 'sinon';
 
-const { expect } = require('../support/expect');
-const { invalidMessage, validMessage } = require('../support/stubs');
-const { Messenger, Message } = require('../../src/domain');
+import MockChannel from '../../src/domain/channels/mock-channel';
+import { expect } from '../support/expect';
+import { invalidMessage, validMessage } from '../support/stubs';
+import { Messenger, Message } from '../../src/domain';
 
 const nullChannel = {
   send: () => null
@@ -18,6 +19,14 @@ describe('A Messenger', () => {
 
   beforeEach(() => {
     messenger = new Messenger(nullChannel);
+  });
+
+  it('should have record of a valid Message sent via a MockChannel', () => {
+    const channel = new MockChannel();
+
+    Messenger.send(new Message(validMessage), channel);
+
+    expect(channel.messages[0]).to.deep.equal(validMessage);
   });
 
   it('should throw when it is created without a Channel', () => {

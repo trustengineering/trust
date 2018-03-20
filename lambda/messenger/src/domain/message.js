@@ -2,14 +2,14 @@
  *
  */
 
-const validations = require('./validations');
+import validations from './validations';
 
-class Message{
-  constructor(rawMessage){
+class Message {
+  constructor(rawMessage) {
     this.rawMessage = rawMessage;
   }
 
-  validate(){
+  validate() {
     const isValid = rawMessage =>
       validations.isDefined(rawMessage) &&
       validations.isDefined(rawMessage.sender) &&
@@ -30,4 +30,4 @@ Message.Errors = {
   invalidMessage: 'Invalid message'
 };
 
-module.exports = Message;
+export default Message;

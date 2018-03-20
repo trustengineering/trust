@@ -1,1 +1,1 @@
-module.exports = require('./src/lambda');
+import './src/lambda';

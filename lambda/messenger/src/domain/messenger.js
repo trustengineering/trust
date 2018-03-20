@@ -3,11 +3,17 @@
  *
  */
 
-const validations = require('./validations');
+import validations from './validations';
 
-class Messenger{
+class Messenger {
+  static send(message, channel) {
+    const m = new Messenger(channel);
 
-  constructor(channel){
+    m.receive(message);
+    m.send();
+  }
+
+  constructor(channel) {
     if (!validations.isDefined(channel) || !validations.isAFunction(channel.send)) {
       throw new Error(Messenger.Errors.InvalidChannel);
     }
@@ -19,8 +25,8 @@ class Messenger{
     Object.seal(this);
   }
 
-  receive(message){
-    if (!validations.isDefined(message) || !validations.isAFunction(message.validate)){
+  receive(message) {
+    if (!validations.isDefined(message) || !validations.isAFunction(message.validate)) {
       throw new Error(Messenger.Errors.InvalidMessage);
     }
 
@@ -31,16 +37,14 @@ class Messenger{
     return this.readyToSend;
   }
 
-  send(){
+  send() {
     return this.readyToSend && this.messagingAdapter.send(this.message);
   }
 }
 
-
 Messenger.Errors = {
   InvalidChannel: 'Invalid channel',
-  InvalidMessage: 'Invalid message',
+  InvalidMessage: 'Invalid message'
 };
 
-
-module.exports = Messenger;
+export default Messenger;

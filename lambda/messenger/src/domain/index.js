@@ -1,9 +1,12 @@
 /*
 
  */
-const moduleExports = {};
+import Message from './message';
+import Messenger from './messenger';
 
-moduleExports.Message = require('./message');
-moduleExports.Messenger = require('./messenger');
+const domain = {};
 
-module.exports = moduleExports;
+domain.Message = Message;
+domain.Messenger = Messenger;
+
+export { domain as default, Message, Messenger };
