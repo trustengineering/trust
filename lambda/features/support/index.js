@@ -1,7 +1,9 @@
-const chai = require('chai');
-const expect = chai.expect;
+import chai from 'chai';
+import chaisAsPromised from 'chai-as-promised';
 
-chai.use(require('chai-as-promised'));
+const { expect } = chai;
+
+chai.use(chaisAsPromised);
 
 module.exports = {
   chai,

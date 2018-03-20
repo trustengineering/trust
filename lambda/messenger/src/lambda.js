@@ -4,13 +4,13 @@
 
 import { Messenger } from './domain';
 import LogChannel from './domain/channels/log-channel';
+import Message from "./domain/message";
 
 const messenger = (event, context, callback) => {
   Messenger.send(
-    event.body,
+    new Message(event.body),
     new LogChannel(msg => {
-      console.log(`msg = `, msg); // eslint-disable-line
-      callback(null, msg);
+      callback(null, msg.rawMessage);
     })
   );
 

@@ -4,7 +4,6 @@ class LogChannel {
   }
 
   send(msg) {
-    console.log(`msg = `, msg); // eslint-disable-line
     this.postSendFn(msg);
   }
 }

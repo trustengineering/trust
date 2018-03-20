@@ -1,13 +1,29 @@
-const { defineSupportCode } = require('cucumber');
+import { promisify } from 'es6-promisify';
+import { expect } from '../support';
 
-defineSupportCode(({ Given, Then, When }) => {
+import messenger from '../../messenger/src/lambda';
 
-  Given(/^Jane has found a way to contact us$/, () => null);
+const { Given, When, Then } = require('cucumber');
 
-  When(/^she completes the required details correctly$/, () => null);
+const lambdaMessenger = promisify(messenger);
+import { validMessage } from '../../messenger/test/support/stubs';
 
-  When(/^sends them to us$/, () => null);
+const steps = () => {
+  const context = {};
 
-  Then(/^she receives confirmation that their message has been sent$/, () => null);
+  Given(/^Jane has found a way to contact us$/, () => {
+    context.lambdaMessenger = lambdaMessenger;
+  });
 
-});
+  When(/^she sends her details to us$/, () => {
+    context.event = {
+      body: validMessage
+    };
+  });
+
+  Then(/^she receives confirmation that their message has been sent$/, () =>
+    expect(context.lambdaMessenger(context.event, {})).eventually.to.deep.equal(validMessage)
+  );
+};
+
+steps();
