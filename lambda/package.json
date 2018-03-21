@@ -6,8 +6,9 @@
   "scripts": {
     "clean": "rm -rf ./*/dist",
     "build": "webpack --config webpack.config.js",
-    "test": "cucumber-js --require-module babel-register --require-module babel-polyfill -r ./features/step_definitions/**",
+    "test": "npm run unit && npm run acceptance",
     "unit": "cd ./messenger && npm test",
+    "acceptance": "cucumber-js --require-module babel-register --require-module babel-polyfill -r ./features/step_definitions/**",
     "prettier": "prettier --config ./.prettierrc --write \"./**/.js\" "
   },
   "author": "",
