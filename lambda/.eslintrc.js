@@ -8,7 +8,8 @@ module.exports = {
     },
     "plugins": ["prettier"],
     "rules": {
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "devDependencies": false,
     },
     "globals": {
         "expect":true,

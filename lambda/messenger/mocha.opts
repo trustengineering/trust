@@ -1,5 +1,7 @@
---require ./test/support/test-setup.js
+--require babel-polyfill
+--require babel-register
 --ui bdd
 --globals module
 --timeout 200
 --colors
+--recursive
