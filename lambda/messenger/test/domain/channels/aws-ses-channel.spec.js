@@ -1,5 +1,6 @@
 import { expect } from '../../support/expect';
 import AwsSesChannel from '../../../src/domain/channels/aws-ses-channel';
+import Message from '../../../src/domain/message';
 
 describe('An AwsSesChannel', () => {
   it('should be able to send emails without crashing', () => {
@@ -14,6 +15,6 @@ describe('An AwsSesChannel', () => {
     };
     const fakeMsg = new Message(fakeRawMessage);
 
-    expect(() => ses.send(fakeMsg)).eventually.not.to.throw();
+    return expect(ses.send(fakeMsg)).eventually.to.be.fulfilled;
   });
 });

@@ -5,7 +5,12 @@ class AwsSesChannel {
     return 'UTF-8';
   }
 
-  createSESParams(message) { // eslint-disable-line
+  static send(message) {
+    const ses = new AwsSesChannel();
+    return ses.send(message);
+  }
+
+  createSesParams(message) { // eslint-disable-line
     const verifiedSenderEmailAddress = 'info@trustengineering.io';
     const recipientEmailAddress = 'lewis@trustengineering.io';
     const { subject, body, sender } = message.rawMessage;
@@ -57,15 +62,19 @@ class AwsSesChannel {
   send(message) {
     // Create a new SES object.
     const ses = new aws.SES();
-
     // Try to send the email.
-    ses.sendEmail(this.createSESParams(message), (err, data) => {
-      // If something goes wrong, print an error message.
-      if (err) {
-        console.log(err.message);
-      } else {
-        console.log('Email sent! Message ID: ', data.MessageId);
-      }
+
+    return new Promise((resolve, reject) => {
+      ses.sendEmail(this.createSesParams(message), (err, data) => {
+        // If something goes wrong, print an error message.
+        if (err) {
+          console.log(err.message);
+          reject(err.message);
+        } else {
+          console.log('Email sent! Message ID: ', data.MessageId);
+          resolve(data.MessageId);
+        }
+      });
     });
   }
 }
