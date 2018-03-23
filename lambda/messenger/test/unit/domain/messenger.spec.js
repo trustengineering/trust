@@ -1,14 +1,13 @@
 /**
  *  eslint-env node, mocha
- *
  */
 
 import sinon from 'sinon';
 
-import MockChannel from '../../src/domain/channels/mock-channel';
-import { expect } from '../support/expect';
-import { invalidMessage, validMessage } from '../support/stubs';
-import { Messenger, Message } from '../../src/domain';
+import MockChannel from '../../../src/domain/channels/mock-channel';
+import { expect } from '../../support/expect';
+import { invalidMessage, validMessage } from '../../support/stubs';
+import { Messenger, Message } from '../../../src/domain';
 
 const nullChannel = {
   send: () => null

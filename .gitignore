@@ -170,3 +170,4 @@ Temporary Items
 .apdisk
 
 .idea
+/lambda/_env/env.decrypted.json

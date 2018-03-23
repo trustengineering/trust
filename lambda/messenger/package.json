@@ -4,7 +4,9 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "mocha --opts mocha.opts"
+    "test": "npm run unit && npm run i9n",
+    "unit": "mocha test/unit --opts mocha.opts",
+    "i9n": "mocha test/i9n --opts mocha.opts"
   },
   "author": "",
   "license": "ISC",

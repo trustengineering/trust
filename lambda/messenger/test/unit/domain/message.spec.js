@@ -3,8 +3,8 @@
  *
  */
 
-const { expect } = require('../support/expect');
-const { Message } = require('../../src/domain');
+import { expect } from '../../support/expect';
+import { Message } from '../../../src/domain';
 
 describe('A Message', () => {
   it('should fail validation when no sender is provided', () => {

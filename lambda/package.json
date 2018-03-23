@@ -7,13 +7,18 @@
     "clean": "rm -rf ./*/dist",
     "build": "webpack --config webpack.config.js",
     "test": "npm run unit && npm run acceptance",
+    "test-local": "mocha --opts mocha.opts",
     "unit": "cd ./messenger && npm test",
     "acceptance": "cucumber-js --require-module babel-register --require-module babel-polyfill -r ./features/step_definitions/**",
-    "prettier": "prettier --config ./.prettierrc --write \"./**/.js\" "
+    "prettier": "prettier --config ./.prettierrc --write \"./**/.js\"",
+    "encrypt:env": "node --require babel-register --require babel-polyfill ./scripts/encrypt-file ./_env/env.decrypted.json ./_env/env.encrypted",
+    "decrypt:env": "node --require babel-register --require babel-polyfill ./scripts/decrypt-file ./_env/env.encrypted ./_env/env.decrypted.json",
+    "update:env": "npm run encrypt:env && npm run decrypt:env"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "aws-sdk": "^2.213.1",
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.6.1",
     "babel-register": "6.26.0",
@@ -27,8 +32,10 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
+    "mocha": "^5.0.4",
     "prettier": "^1.11.1",
     "webpack": "4.1.1",
     "webpack-cli": "2.0.12"
-  }
+  },
+  "dependencies": {}
 }
