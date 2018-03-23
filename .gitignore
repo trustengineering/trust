@@ -171,3 +171,6 @@ Temporary Items
 
 .idea
 /lambda/_env/env.decrypted.json
+**/dist
+/lambda/reports/cucumber_report.json
+/lambda/reports/cucumber_report.html

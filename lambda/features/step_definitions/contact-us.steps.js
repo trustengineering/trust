@@ -22,7 +22,7 @@ const steps = () => {
   });
 
   Then(/^she receives confirmation that their message has been sent$/, () =>
-    expect(context.lambdaMessenger(context.event, {})).eventually.to.deep.equal(validMessage)
+    expect(context.lambdaMessenger(context.event, {})).eventually.to.deep.equal({ status: 'ok' })
   );
 };
 

@@ -8,6 +8,9 @@ import Message from './domain/message';
 
 const messenger = (event, context, callback) => {
   Messenger.send(new Message(event.body), new AwsSesChannel());
+  callback(null, {
+    status: 'ok'
+  });
 };
 
 export default messenger;

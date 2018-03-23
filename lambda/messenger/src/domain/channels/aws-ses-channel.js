@@ -52,10 +52,8 @@ class AwsSesChannel {
     return new Promise((resolve, reject) => {
       ses.sendEmail(this.createSesParams(message, env), (err, data) => {
         if (err) {
-          console.log(err.message);
           reject(err.message);
         } else {
-          console.log('Email sent! Message ID: ', data.MessageId);
           resolve(data.MessageId);
         }
       });
