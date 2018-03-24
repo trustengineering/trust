@@ -1,8 +1,8 @@
 /**
  *
  */
-import chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
+import chai from 'chai';// eslint-disable-line
+import chaiAsPromised from 'chai-as-promised'; // eslint-disable-line
 
 chai.use(chaiAsPromised);
 
