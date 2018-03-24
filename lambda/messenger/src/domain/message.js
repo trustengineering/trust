@@ -2,7 +2,7 @@
  *
  */
 
-import { Validations } from '../../../../@trust-core';
+import { Validations } from '@trust/core';
 
 class Message {
   constructor(rawMessage) {

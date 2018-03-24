@@ -3,7 +3,7 @@
  *
  */
 
-import { Validations } from '../../../../@trust-core';
+import { Validations } from '@trust/core';
 
 class Messenger {
   static send(message, channel) {
