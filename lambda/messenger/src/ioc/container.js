@@ -1,11 +1,13 @@
 let containerInstance;
 
-const register = (name, Newable, context) => {
-  context.types[name] = Symbol(name); // eslint-disable-line
-  context.store.set(context.types[name], Newable);
+const context = ctx => ({
+  registerType: (name, Newable) => {
+    ctx.types[name] = Symbol(name); // eslint-disable-line
+    ctx.store.set(ctx.types[name], Newable);
 
-  return context;
-};
+    return ctx;
+  }
+});
 
 class Container {
   static instance() {
@@ -30,7 +32,7 @@ class Container {
       throw new Error(Container.errors.typeAlreadyRegistered);
     }
 
-    return register(name, Newable, this);
+    return context(this).registerType(name, Newable);
   }
 
   reRegister(name, Newable) {
@@ -42,7 +44,7 @@ class Container {
       throw new Error(Container.errors.typeAlreadyRegistered);
     }
 
-    return register(name, Newable, this);
+    return context(this).registerType(name, Newable);
   }
 
   get(name) {
