@@ -1,3 +1,5 @@
+import validations from '../validations';
+
 let containerInstance;
 
 const context = ctx => ({
@@ -28,7 +30,7 @@ class Container {
       throw new Error(Container.errors.notAConstructor);
     }
 
-    if (this.types[name] !== undefined) {
+    if (validations.isDefined(this.types[name])) {
       throw new Error(Container.errors.typeAlreadyRegistered);
     }
 
@@ -40,7 +42,7 @@ class Container {
       throw new Error(Container.errors.notAConstructor);
     }
 
-    if (this.types[name] === undefined) {
+    if (!validations.isDefined(this.types[name])) {
       throw new Error(Container.errors.typeAlreadyRegistered);
     }
 

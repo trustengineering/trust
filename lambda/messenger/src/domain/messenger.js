@@ -3,7 +3,7 @@
  *
  */
 
-import validations from './validations';
+import validations from '../validations';
 
 class Messenger {
   static send(message, channel) {

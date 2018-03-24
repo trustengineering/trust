@@ -2,7 +2,7 @@
  *
  */
 
-import validations from './validations';
+import validations from '../validations';
 
 class Message {
   constructor(rawMessage) {
