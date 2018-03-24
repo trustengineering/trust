@@ -1,5 +1,12 @@
 let containerInstance;
 
+const register = (name, Newable, context) => {
+  context.types[name] = Symbol(name); // eslint-disable-line
+  context.store.set(context.types[name], Newable);
+
+  return context;
+};
+
 class Container {
   static instance() {
     if (!(containerInstance instanceof Container)) {
@@ -16,10 +23,26 @@ class Container {
 
   register(name, Newable) {
     if (typeof Newable !== 'function') {
-      throw new Error('Newable must be a constructor');
+      throw new Error(Container.errors.notAConstructor);
     }
-    this.types[name] = Symbol(name);
-    this.store.set(this.types[name], Newable);
+
+    if (this.types[name] !== undefined) {
+      throw new Error(Container.errors.typeAlreadyRegistered);
+    }
+
+    return register(name, Newable, this);
+  }
+
+  reRegister(name, Newable) {
+    if (typeof Newable !== 'function') {
+      throw new Error(Container.errors.notAConstructor);
+    }
+
+    if (this.types[name] === undefined) {
+      throw new Error(Container.errors.typeAlreadyRegistered);
+    }
+
+    return register(name, Newable, this);
   }
 
   get(name) {
@@ -34,6 +57,11 @@ class Container {
     return this;
   }
 }
+
+Container.errors = {
+  notAConstructor: 'Newable must be a constructor',
+  typeAlreadyRegistered: 'Type already registered'
+};
 
 const container = Container.instance();
 

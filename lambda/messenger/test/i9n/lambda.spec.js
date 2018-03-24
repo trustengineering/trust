@@ -22,7 +22,7 @@ describe('A Messenger Lambda', () => {
   };
 
   before(() => {
-    messengerContainer.register('Channel', MockChannel);
+    messengerContainer.reRegister('Channel', MockChannel);
   });
 
   it('should execute without crashing', () => {
