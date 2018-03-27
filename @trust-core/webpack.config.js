@@ -7,7 +7,7 @@ module.exports = {
   target: 'node',
   output: {
     filename: `index.js`,
-    path: path.resolve(__dirname, `./@trust-core/`),
+    path: path.resolve(__dirname, `./`),
     library: '@trust-core',
     libraryTarget: 'umd'
   },
