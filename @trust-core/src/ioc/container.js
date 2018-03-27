@@ -1,3 +1,5 @@
+import Validations from '../validations';
+
 let containerInstance;
 
 const context = ctx => ({
@@ -24,11 +26,11 @@ class Container {
   }
 
   register(name, Newable) {
-    if (typeof Newable !== 'function') {
+    if (!Validations.isAFunction(Newable)) {
       throw new Error(Container.errors.notAConstructor);
     }
 
-    if (this.types[name] !== undefined) {
+    if (Validations.isDefined(this.types[name])) {
       throw new Error(Container.errors.typeAlreadyRegistered);
     }
 
@@ -36,11 +38,11 @@ class Container {
   }
 
   reRegister(name, Newable) {
-    if (typeof Newable !== 'function') {
+    if (!Validations.isAFunction(Newable)) {
       throw new Error(Container.errors.notAConstructor);
     }
 
-    if (this.types[name] === undefined) {
+    if (!Validations.isDefined(this.types[name])) {
       throw new Error(Container.errors.typeAlreadyRegistered);
     }
 
