@@ -9,7 +9,6 @@ import Message from './domain/message';
 const messenger = (event, context, callback) => {
   const Channel = messengerContainer.get('Channel');
   Messenger.send(new Message(event.body), new Channel());
-
   callback(null, {
     status: 'ok'
   });

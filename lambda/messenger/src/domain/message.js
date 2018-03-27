@@ -2,7 +2,7 @@
  *
  */
 
-import validations from './validations';
+import { Validations } from '@trust/core';
 
 class Message {
   constructor(rawMessage) {
@@ -11,12 +11,12 @@ class Message {
 
   validate() {
     const isValid = rawMessage =>
-      validations.isDefined(rawMessage) &&
-      validations.isDefined(rawMessage.sender) &&
-      validations.isAString(rawMessage.subject) &&
-      validations.isAString(rawMessage.body) &&
-      validations.isAString(rawMessage.sender.email) &&
-      validations.isAString(rawMessage.sender.name);
+      Validations.isDefined(rawMessage) &&
+      Validations.isDefined(rawMessage.sender) &&
+      Validations.isAString(rawMessage.subject) &&
+      Validations.isAString(rawMessage.body) &&
+      Validations.isAString(rawMessage.sender.email) &&
+      Validations.isAString(rawMessage.sender.name);
 
     if (!isValid(this.rawMessage)) {
       throw new Error(Message.Errors.invalidMessage);

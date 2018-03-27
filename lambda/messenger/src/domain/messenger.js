@@ -3,7 +3,7 @@
  *
  */
 
-import validations from './validations';
+import { Validations } from '@trust/core';
 
 class Messenger {
   static send(message, channel) {
@@ -14,7 +14,7 @@ class Messenger {
   }
 
   constructor(channel) {
-    if (!validations.isDefined(channel) || !validations.isAFunction(channel.send)) {
+    if (!Validations.isDefined(channel) || !Validations.isAFunction(channel.send)) {
       throw new Error(Messenger.Errors.InvalidChannel);
     }
 
@@ -26,7 +26,7 @@ class Messenger {
   }
 
   receive(message) {
-    if (!validations.isDefined(message) || !validations.isAFunction(message.validate)) {
+    if (!Validations.isDefined(message) || !Validations.isAFunction(message.validate)) {
       throw new Error(Messenger.Errors.InvalidMessage);
     }
 

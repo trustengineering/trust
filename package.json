@@ -1,0 +1,30 @@
+{
+  "name": "trust",
+  "version": "1.0.0",
+  "description": "------ *A scaffolding tool for building and deploying serverless AWS projects*",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "webpack --config ./scripts/build/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trustengineering/trust.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trustengineering/trust/issues"
+  },
+  "homepage": "https://github.com/trustengineering/trust#readme",
+  "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-loader": "7.1.4",
+    "babel-preset-env": "1.6.1",
+    "babel-register": "6.26.0",
+    "webpack": "4.2.0",
+    "webpack-cli": "2.0.13"
+  }
+}
