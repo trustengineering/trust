@@ -1,17 +1,15 @@
 const path = require('path');
 
-const lambdaName = 'messenger';
-
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 module.exports = {
-  entry: `./@trust-core/src/index.js`,
+  entry: `./src/index.js`,
   target: 'node',
   output: {
     filename: `index.js`,
-    path: path.resolve(__dirname, '..', '..', `./@trust-core/`),
-    library: "Core",
-    libraryTarget: "umd"
+    path: path.resolve(__dirname, `./@trust-core/`),
+    library: '@trust-core',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [
@@ -19,7 +17,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       }
     ]

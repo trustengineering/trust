@@ -174,4 +174,4 @@ Temporary Items
 **/dist
 /lambda/reports/cucumber_report.json
 /lambda/reports/cucumber_report.html
-/@trust-core/dist/
+/@trust-core/index.js
