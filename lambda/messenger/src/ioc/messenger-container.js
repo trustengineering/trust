@@ -1,4 +1,4 @@
-import { container } from './container';
+import { container } from '@trust/core';
 import AwsSesChannel from '../domain/channels/aws-ses-channel';
 
 const messengerContainer = container.init({
