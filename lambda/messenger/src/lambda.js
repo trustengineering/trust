@@ -7,8 +7,11 @@ import messengerContainer from './ioc/messenger-container'; // eslint-disable-li
 import Message from './domain/message';
 
 const messenger = (event, context, callback) => {
+  const { parse } = JSON;
   const Channel = messengerContainer.get('Channel');
-  Messenger.send(new Message(event.body), new Channel());
+
+  Messenger.send(new Message(parse(event.body)), new Channel());
+
   callback(null, {
     status: 'ok'
   });

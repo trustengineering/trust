@@ -7,7 +7,16 @@ import MockChannel from '../../src/domain/channels/mock-channel';
 
 const lambda = promisify(messenger);
 
-describe('A Messenger Lambda', () => {
+const lambdaTestUtils = {
+  createProxyLambdaIntegrationEvent: eventObject => {
+    const eo = Object.assign({}, eventObject);
+    eo.body = JSON.stringify(eo.body);
+
+    return eo;
+  }
+};
+
+describe.only('A Messenger Lambda', () => {
   const message = {
     subject: 'SUBJECT',
     body: 'BODY',
@@ -25,10 +34,13 @@ describe('A Messenger Lambda', () => {
     messengerContainer.reRegister('Channel', MockChannel);
   });
 
-  it('should execute without crashing', () => {
-    expect(() => lambda(event, {}).not.to.throw());
-  });
+  it('should execute without crashing', () =>
+    expect(() =>
+      lambda(lambdaTestUtils.createProxyLambdaIntegrationEvent(event), {}).not.to.throw()
+    ));
 
   it('should return an ok status', () =>
-    expect(lambda(event, {})).to.eventually.deep.equal({ status: 'ok' }));
+    expect(
+      lambda(lambdaTestUtils.createProxyLambdaIntegrationEvent(event), {})
+    ).to.eventually.deep.equal({ status: 'ok' }));
 });
