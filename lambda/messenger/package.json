@@ -20,7 +20,7 @@
     "sinon": "^4.4.6"
   },
   "dependencies": {
-    "@trust/core": "../../@trust-core",
+    "@trust/core": "file:../../@trust-core",
     "aws-sdk": "2.212.1"
   }
 }

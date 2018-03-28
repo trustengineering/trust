@@ -21,8 +21,7 @@ class Container {
   }
 
   constructor() {
-    this.types = [];
-    this.store = new Map();
+    this.reset();
   }
 
   register(name, Newable) {
@@ -54,17 +53,24 @@ class Container {
   }
 
   init(typeMap) {
+    console.log('init');
     Object.keys(typeMap).forEach(type => {
       this.register(type, typeMap[type]);
     });
 
     return this;
   }
+
+  reset() {
+    this.types = [];
+    this.store = new Map();
+  }
 }
 
 Container.errors = {
-  notAConstructor: 'Newable must be a constructor',
-  typeAlreadyRegistered: 'Type already registered'
+  notAConstructor: `Newable must be a constructor`,
+  typeAlreadyRegistered: `Type already registered`,
+  typeNotRegistered: `Type not registered`
 };
 
 const container = Container.instance();
