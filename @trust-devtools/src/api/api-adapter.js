@@ -1,4 +1,7 @@
 /* eslint-disable no-console */
+import * as foo from './index';
+
+const Api = foo.apiAdapterContainer.get('express');
 
 const fluent = (name, fn) => {
   const rtn = {};
@@ -8,8 +11,8 @@ const fluent = (name, fn) => {
 };
 
 class ApiAdapter {
-  constructor(api) {
-    this.api = api;
+  constructor() {
+    this.api = new Api();
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -19,9 +22,7 @@ class ApiAdapter {
     // app.post('path', fn);
     const routeFn = adapterFn => adapterFn(this.api, path);
 
-    const pipe = fluent('isHandledBy', routeFn);
-
-    return pipe;
+    return fluent('isHandledBy', routeFn);
   }
 }
 

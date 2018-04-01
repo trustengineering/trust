@@ -15,25 +15,35 @@ describe('A route adapter', () => {
 
   context(' add()', () => {
     it('should add routes to an api', () => {
-      const handler = (event, context, callback) => noOp(event, context, callback);
-      const handler2 = (event, context, callback) => noOp(noOp(event, context, callback));
-
+      const mockLambda = (event, context, callback) => noOp(event, context, callback);
+      const mockLambda2 = (event, context, callback) => noOp(noOp(event, context, callback));
       const mockHttpPath = path => `/api${path}`;
-      const route = (api, httpPath) => api.post(httpPath(`/messages`), handler);
-      const route2 = (api, httpPath) => api.get(httpPath(`/messages/123`), handler2);
+
+      const stubRequest = {
+        verb: 'post',
+        pathPattern: mockHttpPath(`/messages`)
+      };
+
+      const stubRequest2 = {
+        verb: 'post',
+        pathPattern: mockHttpPath(`/messages/123`)
+      };
+      //
+      const mockRouteAdapter = (api, request) => api[request.verb](request.pathPattern, mockLambda);
+      const mockRouteAdapter2 = (api, request) => api[request.verb](request.pathPattern, mockLambda);
 
       // eslint-disable-next-line new-cap
-      const mockExpressApp = new (apiAdapterContainer.get('express'))();
-      const apiAdapter = new ApiAdapter(mockExpressApp);
+      const apiAdapter = new ApiAdapter();
 
-      // todo - adpat the lambda interface ...
-      // apiAdapter.route(mockHttpPath).isHandledBy(ADAPT_FORM_LAMBDA(route));
-      apiAdapter.route(mockHttpPath).isHandledBy(route);
-      apiAdapter.route(mockHttpPath).isHandledBy(route2);
+      // todo - adapt the lambda interface ...
+      // apiAdapter.mockRouteAdapter(mockHttpPathFn).isHandledBy(ADAPT_FORM_LAMBDA(mockRouteAdapter));
+      apiAdapter.route(stubRequest).isHandledBy(mockRouteAdapter);
+      apiAdapter.route(stubRequest2).isHandledBy(mockRouteAdapter2);
 
-      expect(mockExpressApp.routes).to.deep.equal({
-        'POST::/api/messages': handler,
-        'GET::/api/messages/123': handler2
+      const mockApi = apiAdapter.api;
+      expect(mockApi.routes).to.deep.equal({
+        'POST::/api/messages': mockLambda,
+        'GET::/api/messages/123': mockLambda2
       });
     });
   });
