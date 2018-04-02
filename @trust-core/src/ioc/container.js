@@ -53,7 +53,6 @@ class Container {
   }
 
   init(typeMap) {
-    console.log('init');
     Object.keys(typeMap).forEach(type => {
       this.register(type, typeMap[type]);
     });
@@ -64,6 +63,12 @@ class Container {
   reset() {
     this.types = [];
     this.store = new Map();
+  }
+
+  debug() {
+    console.log(`
+    types: ${JSON.stringify(this.types)}
+    `);
   }
 }
 

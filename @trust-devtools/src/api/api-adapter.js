@@ -1,7 +1,5 @@
 /* eslint-disable no-console */
-import * as foo from './index';
-
-const Api = foo.apiAdapterContainer.get('express');
+import { apiAdapterContainer } from './api-adapter-container';
 
 const fluent = (name, fn) => {
   const rtn = {};
@@ -12,6 +10,8 @@ const fluent = (name, fn) => {
 
 class ApiAdapter {
   constructor() {
+    const Api = apiAdapterContainer.get('express');
+
     this.api = new Api();
   }
 

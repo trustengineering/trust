@@ -1,4 +1,2 @@
-export * from './api-adapter';
-export * from './api-adapter-container';
-
-console.log('apiAdapterContainer = ', apiAdapterContainer);
+export { ApiAdapterContainer } from './api-adapter';
+export { apiAdapterContainer } from './api-adapter-container';

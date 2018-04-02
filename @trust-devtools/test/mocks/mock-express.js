@@ -1,4 +1,5 @@
 const addRoute = (verb, path, handler, context) => {
+  console.log(`ROUTE ADDED: `)
   // eslint-disable-next-line no-param-reassign
   context.routes[`${verb}::${path}`] = handler;
   return context;
@@ -6,6 +7,7 @@ const addRoute = (verb, path, handler, context) => {
 
 class MockExpressApp {
   constructor() {
+    console.log('creating MockExpressApp')
     this.routes = {};
   }
 
@@ -39,4 +41,4 @@ const mockExpress = () => {
   return new MockExpressApp();
 };
 
-export { mockExpress as default, mockExpress };
+export { mockExpress as default, mockExpress, MockExpressApp };
