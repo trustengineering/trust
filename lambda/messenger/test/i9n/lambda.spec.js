@@ -2,7 +2,7 @@ import { expect } from '../support/expect';
 
 import { messenger } from '../../src/lambda';
 import { promisify } from 'es6-promisify'; // eslint-disable-line
-import { messengerContainer } from '../../src/ioc/messenger-container';
+import { messengerContext } from '../../src/ioc/messenger-context';
 import MockChannel from '../../src/domain/channels/mock-channel';
 
 const lambda = promisify(messenger);
@@ -16,7 +16,7 @@ const lambdaTestUtils = {
   }
 };
 
-describe.only('A Messenger Lambda', () => {
+describe('A Messenger Lambda', () => {
   const message = {
     subject: 'SUBJECT',
     body: 'BODY',
@@ -31,7 +31,7 @@ describe.only('A Messenger Lambda', () => {
   };
 
   before(() => {
-    messengerContainer.reRegister('Channel', MockChannel);
+    messengerContext.reRegister('Channel', MockChannel);
   });
 
   it('should execute without crashing', () =>

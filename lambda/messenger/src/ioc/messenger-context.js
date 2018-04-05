@@ -1,8 +1,9 @@
+// noinspection ES6CheckImport
 import { container } from '@trust/core'; // eslint-disable-line
 import AwsSesChannel from '../domain/channels/aws-ses-channel';
 
-const messengerContainer = container.init({
+const messengerContext = container.init({
   Channel: AwsSesChannel
 });
 
-export { messengerContainer as default, messengerContainer };
+export { messengerContext as default, messengerContext };

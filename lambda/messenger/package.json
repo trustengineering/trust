@@ -6,16 +6,20 @@
   "scripts": {
     "test": "npm run unit && npm run i9n",
     "unit": "mocha test/unit --opts mocha.opts",
-    "i9n": "mocha test/i9n --opts mocha.opts"
+    "i9n": "mocha test/i9n --opts mocha.opts",
+    "exp": "node --require babel-polyfill --require babel-register test/support/test-express.js "
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "axios": "0.18.0",
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.6.1",
     "babel-register": "6.26.0",
+    "body-parser": "1.18.2",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
+    "express": "4.16.3",
     "mocha": "^5.0.4",
     "sinon": "^4.4.6"
   },

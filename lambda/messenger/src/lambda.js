@@ -3,18 +3,25 @@
  */
 
 import { Messenger } from './domain';
-import messengerContainer from './ioc/messenger-container'; // eslint-disable-line
+import messengerContext from './ioc/messenger-context'; // eslint-disable-line
 import Message from './domain/message';
 
 const messenger = (event, context, callback) => {
   const { parse } = JSON;
-  const Channel = messengerContainer.get('Channel');
 
-  Messenger.send(new Message(parse(event.body)), new Channel());
+  try {
+    const Channel = messengerContext.get('Channel');
 
-  callback(null, {
-    status: 'ok'
-  });
+    Messenger.send(new Message(parse(event.body)), new Channel());
+
+    callback(null, {
+      status: 'ok'
+    });
+  } catch (err) {
+    callback(err, {
+      status: 'not ok'
+    });
+  }
 };
 
 export { messenger as default, messenger };
